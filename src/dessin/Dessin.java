@@ -14,6 +14,15 @@ public class Dessin extends Canvas{
 	private int y;
 	private int xc;
 	private int yc;
+	private Color color;
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	public int getXc() {
 		return xc;
 	}
@@ -72,8 +81,9 @@ public class Dessin extends Canvas{
 	@Override
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
+		g.setColor(color);
 		if(choix=="rectangle") {
-			g.setColor(Color.red);
+			
 			g.drawRect(x, y, xc-x, yc-y);
 			
 		}else {

@@ -15,6 +15,8 @@ import java.beans.PropertyChangeListener;
 import javax.swing.ComboBoxEditor;
 import javax.swing.JColorChooser;
 import javax.swing.colorchooser.ColorChooserComponentFactory;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.ColorChooserUI;
 import javax.swing.plaf.basic.BasicColorChooserUI;
 
@@ -136,6 +138,36 @@ public class Planche extends Frame {
 		//p2.add(colorChooser);
 		Button b=new Button();
 		b.setBackground(Color.black);
+		b.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Frame f=new Frame();
+				f.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosing(WindowEvent e) {
+						f.dispose();
+					}
+				});
+				f.setSize(300,200);
+				f.setLayout(new BorderLayout());
+				JColorChooser colorer=new JColorChooser();
+				f.add(colorer,BorderLayout.CENTER);
+				colorer.getSelectionModel().addChangeListener(new ChangeListener() {
+					
+					@Override
+					public void stateChanged(ChangeEvent e) {
+						// TODO Auto-generated method stub
+						Color c=colorer.getColor();
+						d.setColor(c);
+						b.setBackground(c);
+					}
+				});
+				//colorer.setVisible(true);
+				f.setVisible(true);
+			}
+		});
 		p2.add(b);
 		this.add(p2,BorderLayout.SOUTH);
 		setVisible(true);
